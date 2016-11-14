@@ -70,6 +70,37 @@ namespace :generate do
 		end
 	end
 
+	desc "Create an empty controller in app/controller, e.g., rake generate:controller NAME=users"
+	task :controller do
+		unless ENV.has_key?('NAME')
+			raise "Must specificy controller name, e.g., rake generate:controller NAME=users"
+		end
+
+		if ENV['NAME'] != ENV['NAME'].pluralize
+			puts "==================================================================="
+			puts "	WARNING: #{ENV['NAME']} is plural. Auto-correcting to pluralize."
+			puts "==================================================================="
+			ENV['NAME'] = ENV['NAME'].pluralize
+		end
+
+		controller_name			= ENV['NAME']
+		controller_filename	= ENV['NAME'].underscore + "_controller" + '.rb'
+		controller_path			= APP_ROOT.join('app', 'controllers', controller_filename)
+
+		if File.exist?(controller_path)
+			raise "ERROR: controller file '#{controller_path}' already exists"
+		end
+
+		puts "Creating #{controller_path}"
+		File.open(controller_path, 'w+') do |f|
+			f.write(<<-EOF.strip_heredoc)
+				get '/' do
+					erb :""
+				end
+			EOF
+		end
+	end
+
 	desc "Create an empty migration in db/migrate, e.g., rake generate:migration NAME=create_tasks"
 	task :migration do
 		unless ENV.has_key?('NAME')
