@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Serif:400,700|Lato:300,400');
+*{
+	outline: 0;
+}
+
+body{
+	font-family: "Lato",Helvetica,Arial,sans-serif;
+	font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-col{
+	flex-direction: column;
+}
+
+.wrapper{
+	height: 100vh;
+	width: 100%;
+	background: url(/img/bg.png) no-repeat center center fixed;
+	background-size: cover;
+}
+
+.register{
+	/*background: red;*/
+}
+
+.register .logo{
+	margin: 60px auto 15px;
+}
+.register .lead{
+	margin: 10px auto 20px;
+	font-family: 'Droid Serif', Serif;
+	font-weight: 700;
+	color: #8f8f8f;
+}
+
+.forms{
+	margin: 0 auto;
+	width: 684px;
+	background: white;
+	border: .5px solid #e2e2e2;	
+	box-shadow: 4px 4px 6px 0 rgba(200,200,200,0.2);
+	padding: 20px;
+}
+
+.forms .title{
+	font-size: 1.2rem;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#log-in{
+	height: 300px;
+}
+
+.forms #log-in{
+	padding-left: 30px;
+	border-left: 1px solid #222;
+}
+
+#log-in .form-control, #sign-up .form-control{
+	height: 36px;
+	background: #e2e2e2;
+	border-radius: 30px;
+	margin-top: 20px;
+}
+
+#log-in .btn, #sign-up .btn{
+	width: 264px;
+	border-radius: 30px;
+	margin-top: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::-webkit-input-placeholder {
+   color: #222 !important;
+   font-size: .8rem;
+   font-family: "Lato", sans-serif;
+   font-weight: 400;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #222 !important;
+   font-size: .8rem;
+   font-family: "Lato", sans-serif;
+   font-weight: 400;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #222 !important;
+   font-size: .8rem;
+   font-family: "Lato", sans-serif;
+   font-weight: 400;  
+}
+
+:-ms-input-placeholder {  
+   color: #222 !important;
+   font-size: .8rem;
+   font-family: "Lato", sans-serif;
+   font-weight: 400;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

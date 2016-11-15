@@ -1,0 +1,7 @@
+<h2>Update an answer</h2>
+<form action="/answer/update" method="POST">
+	<input type="hidden" name="_method" value="patch">
+	<input type="hidden" name="id" value="<%= @answer.id %>">
+	<input type="text" class="form-control" placeholder="Title" name="title" value="<%= @answer.content %>">
+	<input type="submit" class="btn btn-success" placeholder="Update">
+</form>

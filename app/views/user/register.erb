@@ -1,32 +1,39 @@
-<h1 class="title">Quora</h1>
-<h4 class="lead">The Best Answer To Any Question</h4>
-<!-- Sign Up Form -->
-<div class="col-md-5">
-  <form action="/sign-up" method="POST" id="sign-up">
-    <div class="form-group">
-       <input type="text" class="form-control" name="first_name" placeholder="Enter first name">
-     </div>
-     <div class="form-group">
-       <input type="text" class="form-control" name="last_name" placeholder="Enter last name">
-     </div>
-     <div class="form-group">
-       <input type="email" class="form-control" name="email" placeholder="Enter email">
-     </div>
-     <div class="form-group">
-       <input type="password" class="form-control" name="password" placeholder="Enter password">
-     </div>
-     <input type="submit" class="btn btn-primary" value="Sign Up">
-  </form>
-</div>
-<!-- Log In Form -->
-<div class="col-md-5">
-  <form action="/log-in" method="POST" id="log-in">
-    <div class="form-group">
-       <input type="email" class="form-control" name="email" placeholder="Enter email">
-     </div>
-     <div class="form-group">
-       <input type="password" class="form-control" name="password" placeholder="Enter password">
-     </div>
-     <input type="submit" class="btn btn-primary" value="Log In">
-  </form>
-</div>
+<div class="register flex flex-col">
+  <img src="/img/logo.svg" alt="" class="logo" width="242" height="63">
+  <h4 class="lead">The Best Answer To Any Question</h4>
+  <!-- Sign Up Form -->
+  <div class="forms">
+      <div class="col-md-6">
+        <form action="/sign-up" method="POST" id="sign-up">
+          <h4 class="title">Sign Up</h4>
+          <div class="form-group">
+             <input type="text" class="form-control" name="first_name" placeholder="Enter first name">
+           </div>
+           <div class="form-group">
+             <input type="text" class="form-control" name="last_name" placeholder="Enter last name">
+           </div>
+           <div class="form-group">
+             <input type="email" class="form-control" name="email" placeholder="Enter email">
+           </div>
+           <div class="form-group">
+             <input type="password" class="form-control" name="password" placeholder="Enter password">
+           </div>
+           <input type="submit" class="btn btn-primary" value="Sign Up">
+        </form>
+      </div>
+      <!-- Log In Form -->
+      <div class="col-md-6">
+        <form action="/log-in" class="flex flex-col" method="POST" id="log-in">
+          <h4 class="title">Log In</h4>
+          <div class="form-group">
+             <input type="email" class="form-control" name="email" placeholder="Enter email">
+           </div>
+           <div class="form-group">
+             <input type="password" class="form-control" name="password" placeholder="Enter password">
+           </div>
+           <input type="submit" class="btn btn-primary" value="Log In">
+        </form>
+      </div>  
+    </div>
+  </div>
+  

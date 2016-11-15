@@ -1,0 +1,19 @@
+*{
+	outline: 0;
+}
+
+body{
+	font-family: clarendon-wide, sans-serif;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-col{
+	flex-direction: column;
+}
+
