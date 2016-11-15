@@ -20,12 +20,12 @@
         <div class="tab-pane active" id="questions" role="tabpanel">
           <% @user.questions.each do |question| %>
               <h3 class="title"><%= question.title %></h3>
-              <p class="title"><%= question.description %></p>
+              <p class="leads"><%= question.description %></p>
           <% end %>
         </div>
         <div class="tab-pane" id="answers" role="tabpanel">
-          <p class="leads">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-          </p>
+          <% @user.answers.each do |answer| %>
+              <p class="leads"><%= answer.content %></p>
+          <% end %>
         </div>
     </div>

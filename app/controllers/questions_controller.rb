@@ -41,7 +41,7 @@ patch '/question/update', allows: [:id, :title, :description] do
 		redirect to("/index")
 	else
 		puts "ERROR #{@question.errors.full_messages}"
-		redirect to("/question/#{params[:id]}/edit")
+		redirect to("/question/#{params['id']}/edit")
 	end
 end
 

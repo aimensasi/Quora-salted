@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	has_many :questions
+	has_many :answers
 
 	validates :first_name, :presence => true, :length => {:maximum => 45}
 	validates :last_name, :presence => true, :length => {:maximum => 45}
