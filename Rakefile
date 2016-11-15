@@ -29,7 +29,7 @@ namespace :generate do
 				require 'spec_helper'
 
 				# Requiring test subject file. Uncomment below.
-				# require_relative File.join(APP_CONTROLLER, "static")
+				# require_relative File.join(APP_CONTROLLERS, "static")
 
 				# Test cases
 				describe '#{name}' do
