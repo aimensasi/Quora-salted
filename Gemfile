@@ -39,3 +39,8 @@ end
 gem "eventmachine", "1.0.9"
 
 gem 'bcrypt', '~> 3.1.7'
+
+gem 'byebug'
+
+#putting constraint on which parameter are allowed for each rout
+gem 'sinatra-strong-params'

@@ -23,10 +23,10 @@
               <a class="nav-item nav-link" href="#">Answers</a>
               <li class="nav-item dropdown">
                  <a class="nav-link dropdown-toggle" href="" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <%= @current_user.name %>
+                   <%= @current_user ? @current_user.name : 'User' %>
                  </a>
                  <div class="dropdown-menu" aria-labelledby="profile">
-                   <a class="dropdown-item" href="/user/<%= @current_user.id %>">Profile</a>
+                   <a class="dropdown-item" href="/user/<%= @current_user.id if @current_user %>">Profile</a>
                    <a class="dropdown-item" href="/log-out">Log out</a>
                  </div>
               </li>

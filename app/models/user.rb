@@ -6,10 +6,12 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
+	has_many :questions
+
 	validates :first_name, :presence => true, :length => {:maximum => 45}
 	validates :last_name, :presence => true, :length => {:maximum => 45}
 	validates :email, :presence => true, :uniqueness => true, :length => {:maximum => 120}, :format => {:with => EMAIL_REGEX}
-	# validates :password, :length => {:minimum => 8}, :format => {:with => PASSWORD_REGEX}
+	validates :password, :length => {:minimum => 8}, :format => {:with => PASSWORD_REGEX}
 
 
 	def name 
