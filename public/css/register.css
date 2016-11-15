@@ -55,27 +55,68 @@ body{
 	margin-bottom: 15px;
 }
 
-#log-in{
+.offset-2{
+	width: 270px;
+	padding: 0;
+	padding-left: 20px;
+}
+
+.forms #sign-up, .forms #log-in{
 	height: 300px;
 }
 
+#log-in .form-group, #sign-up .form-group{
+	margin: 10px 0;
+}
+
+#sign-up .form-group-2 .form-group:nth-child(2){
+	margin-left: 10px;
+}
+
+#sign-up input[name="first-name"]{
+	width: 136px;
+}
+
+.forms .form-control{
+	height: 33px;
+	background: #e2e2e2;
+	border-radius: 30px; 
+}
+
 .forms #log-in{
-	padding-left: 30px;
+	padding-left: 40px;
 	border-left: 1px solid #222;
 }
 
-#log-in .form-control, #sign-up .form-control{
-	height: 36px;
-	background: #e2e2e2;
-	border-radius: 30px;
-	margin-top: 20px;
+#log-in .form-control{
+	width: 243px;
+}
+
+#log-in .btn{
+	width: 251px;
 }
 
 #log-in .btn, #sign-up .btn{
-	width: 264px;
 	border-radius: 30px;
 	margin-top: auto;
+	height: 35px;
 }
+
+
+
+
+
+
+
+
+/*
+
+
+#log-in .btn{
+	width: 250px;
+	border-radius: 30px;
+	margin-top: auto;
+}*/
 
 
 
