@@ -21,9 +21,15 @@
               <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
               <a class="nav-item nav-link" href="#">Questions</a>
               <a class="nav-item nav-link" href="#">Answers</a>
-              <a class="nav-item nav-link" href="/user/<%= @current_user.id if @current_user %>">
-              <%= @current_user ? @current_user.name : 'Profile' %>
-              </a>
+              <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle" href="" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <%= @current_user.name %>
+                 </a>
+                 <div class="dropdown-menu" aria-labelledby="profile">
+                   <a class="dropdown-item" href="/user/<%= @current_user.id %>">Profile</a>
+                   <a class="dropdown-item" href="/log-out">Log out</a>
+                 </div>
+              </li>
             </div>
           </nav>
         </div>
