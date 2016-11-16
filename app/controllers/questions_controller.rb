@@ -3,10 +3,15 @@ get '/index' do
 	erb :"question/index"
 end
 
-get '/question/new' do 
-	@question = Question.new
-	puts "New Question"
-	erb :"question/new_question"
+# get '/question/new' do 
+# 	@question = Question.new
+# 	puts "New Question"
+# 	erb :"question/new_question"
+# end
+
+get '/questions' do 
+	@questions = Question.all
+	erb :'question/questions', :layout => false
 end
 
 post '/question/create' do 

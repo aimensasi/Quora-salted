@@ -1,6 +1,10 @@
-<h2>Create A question</h2>
-<form action="/question/create" method="POST">
-	<input type="text" class="form-control" placeholder="Title" name="title">
-	<input type="text" class="form-control" placeholder="Description" name="description">
-	<input type="submit" class="btn btn-primary" placeholder="Submit">
-</form>
+<% content_for :question do %>
+    <form class="form-box">
+      <input type="text" placeholder="Ask a question?" class="title" id="title" name="title">
+      <textarea name="description" class="description" rows="5" placeholder="Description..."></textarea>
+      <input type="submit" class="btn btn-secondary" value="Ask?">
+    </form>
+<% end %> %>
+
+
+

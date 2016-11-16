@@ -1,13 +1,7 @@
-<div class="col-md-8 offset-md-2">
-  <div class="container">
-		<% @questions.each do |q| %>
-				<div class="row question">
-					<h4 class="title"><%= q.title %></h4>
-					<p class="leads"><%= q.description %></p>
-					<button class="btn btn-upvote" id="up-vote">Upvote</button>
-					<button class="btn btn-outline-secondary" id="down-vote">Downvote</button>
-				</div>
-		<%end%>
-  </div>
-
+<form class="form-box flex flex-col" action="/question/create" method="post">
+  <input type="text" placeholder="Ask a question?" class="title" id="title" name="title">
+  <textarea name="description" class="description" rows="5" placeholder="Description..."></textarea>
+  <input type="submit" class="btn btn-secondary" value="Ask?" id="submit-q">
+</form>
+<div id="questions"></div>
 

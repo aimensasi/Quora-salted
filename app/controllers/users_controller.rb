@@ -17,7 +17,7 @@ get '/' do
 		@current_user = current_user
 		redirect to('/index')
 	else
-		erb :"user/register", :layout => :'layouts/register_layout'	
+		erb :"layouts/register", :layout => false
 	end
 end
 

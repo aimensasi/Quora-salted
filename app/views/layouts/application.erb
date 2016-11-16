@@ -8,18 +8,24 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/application.css">
   </head>
   <body>
 
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row header">
         <div class="container">
-          <nav class="navbar navbar-light bg-faded">
-            <div class="nav navbar-nav">
-              <a class="navbar-brand" href="/">Quora</a>
-              <a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-              <a class="nav-item nav-link" href="/index">Questions</a>
+          <nav class="navbar navbar-light">
+            <div class="nav navbar-nav flex">
+              <a class="navbar-brand" href="/"><img src="/img/logo.svg" height="50" width="80" alt="Quora" class="logo"></a>
+              <li class="nav-item">
+                    <a class="nav-link" href="/index">Home</a>
+              </li>
+              <li class="nav-item">
+                    <a class="nav-link" href="#">Question</a>
+              </li>
               <li class="nav-item dropdown">
                  <a class="nav-link dropdown-toggle" href="" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    <%= @current_user ? @current_user.name : 'User' %>
@@ -35,7 +41,9 @@
       </div>
       <div class="row">
         <div class="container">
-          <%= yield %>
+          <div class="col-md-7 offset-md-2">
+            <%= yield %>
+          </div>
         </div>
       </div>
     </div>
@@ -46,5 +54,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+    <script src="/js/application.js"></script>
   </body>
 </html>

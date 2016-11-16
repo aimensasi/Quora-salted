@@ -26,10 +26,6 @@ body{
 	background-size: cover;
 }
 
-.register{
-	/*background: red;*/
-}
-
 .register .logo{
 	margin: 60px auto 15px;
 }
@@ -100,50 +96,8 @@ body{
 	border-radius: 30px;
 	margin-top: auto;
 	height: 35px;
+	font-size: .9rem;
 }
-
-
-
-
-
-
-
-
-/*
-
-
-#log-in .btn{
-	width: 250px;
-	border-radius: 30px;
-	margin-top: auto;
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
