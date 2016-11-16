@@ -4,19 +4,34 @@ $(document).ready(function(){
 
 $(document).on('click', '.btn-answer', function(){
 		var $answerForm = $(this).parent().next();
+		var $answerBox = $answerForm.next();
 
 		if ($answerForm.children().length <= 1) {
+
+			if ($answerBox.length) {
+				$answerBox.remove();
+			}
+
 			answerField = '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
 			answerField += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
 
 			$answerForm.append(answerField);	
 		}
 
-		$answerForm.on('submit', function(e){
+		$answerForm.off('submit').on('submit', function(e){
 			e.preventDefault();
+			// prevent user from submitting multipe times
+			$(this).find('input[type="submit"]').attr('disabled', 'disabled');
+			// enable submit button on form input
+			$(this).on('input', function(){
+				$(this).find('input[type="submit"]').removeAttr('disabled');
+			});
+			// post an answer
+			console.log('First');
 			sendPostRequest('/answer/create', "html", $answerForm.serialize());
 		});
 });
+
 
 
 function displayQuestions(data){
@@ -24,9 +39,11 @@ function displayQuestions(data){
 }
 
 function displayAnswer(data){
-	console.log(data);
 	var $question = $(`#${data['question_id']}`);
-	$question.find('#answer-form').hide();
+	$question.find('#answer-form').children().not('input[name="question_id"]').remove();
+	if ($question.has(data['template']).length == 0) {
+				
+	}
 	$question.append(data['template']);
 }
 
@@ -50,6 +67,7 @@ function sendGetRequest(url, dataType){
 
 // send A POST Ajax Request
 function sendPostRequest(url, dataType, data){
+	console.log('Sending..');
 	$.ajax({
 					url: url,
 					type: 'POST',
@@ -60,6 +78,7 @@ function sendPostRequest(url, dataType, data){
 						switch(data['status']){
 							case 200:
 								displayAnswer(data);
+								console.log('got Answer');
 							break;
 							case 404:
 							console.log(data['message']);
