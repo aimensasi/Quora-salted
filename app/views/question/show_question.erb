@@ -1,2 +1,1 @@
-<h2>title : <%= @question.title %> </h2>
-<p>Description : <%= @question.description %> </p>
+<%= erb :"question/question_box", :layout => false, :locals => {:question => question }%>

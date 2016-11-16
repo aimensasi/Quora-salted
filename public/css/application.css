@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Droid+Serif:400,700|Lato:300,400|Open+Sans:300,400,600');
 
 *{
-	outline: 0;
+	outline: none !important;
 }
 
 body{
@@ -123,21 +123,21 @@ body{
   /*border-bottom: 1px solid #e9ebee;*/
 }
 
-.user .name-wrapper{
+.question-box .user .name-wrapper{
   margin: 15px 0 0 25px;
 }
 
-.user .name{
+.question-box .user .name{
   font-size: 1.2rem;
   font-family: 'Lato', Sans-serif;
   margin-bottom: 4px;
 }
-.user .time{
+.question-box .user .time{
   font-size: .7rem;
   color: gray;
   font-family: 'Lato', Sans-serif;
 }
-.user .img-thumbnail{
+.question-box .user .img-thumbnail{
   height: 60px;
   border: 1px solid #e9ebee;
 }
@@ -218,6 +218,28 @@ body{
   margin-bottom: 10px;
 }
 
+.answer-box{
+  padding: 10px 9px 5px;
+
+}
+
+.answer-box .user-answer .name{
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.answer-box .user-answer .img{
+  border: 1px solid #fff;
+}
+
+.answer-box .answer-content{
+  text-align: justify;
+  border: none;
+  resize: none;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
 
 
 

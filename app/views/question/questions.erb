@@ -1,21 +1,10 @@
-<% @questions.each do |q| %>
-			<div class="question-box flex flex-col">
-			  <div class="user flex">
-			    <img src="img/default-placeholder.png" alt="..." width="60" height="60" class="img-thumbnail rounded-circle">
-			    <div class="name-wrapper">
-			      <h3 class="name"><%= q.user.name.capitalize %></h3>
-			      <h5 class="time">30 seconds ago</h5>
-			    </div>
-			  </div>
-			  <div class="question-row">
-			    <a href="/question/<%= q.id %>" class="title" ><%= q.title.capitalize %></a>
-			    <p class="description"><%= q.description.capitalize %></p>
-			  </div>
-			  <div class="btns">
-			  	<button class="btn btn-outline-info btn-answer">Answer</button> 
-			    <button class="btn btn-upvote" id="up-vote">Upvote</button>
-			    <button class="btn btn-downvote" id="down-vote">Downvote</button>  
-			  </div>
-			  <form class="answer-form flex flex-col" id="answer-form"></form>
+<% @questions.each do |question| %>
+			<div class="question-box flex flex-col" id="<%= question.id %>">
+			  <%= erb :"question/question_box", :layout => false, :locals => {:question => question }%>
+			  <form class="answer-form flex flex-col" id="answer-form">
+			  	<input type="hidden" value="<%= question.id %>" name="question_id">
+			  </form>
+			  <div class="answer-box" id="answer-box"></div>
 			</div>
 <% end %>
+

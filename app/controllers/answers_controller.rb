@@ -1,18 +1,20 @@
 
-get '/answer/new' do 
-	@answer = Answer.new
-	erb :"answer/new_answer"
-end
+# get '/answer/new' do 
+# 	@answer = Answer.new
+# 	erb :"answer/new_answer"
+# end
 
 post '/answer/create' do 
-	@answer = Answer.new(params)
+	puts "Parameters #{params.inspect}"
+
+	@answer = Answer.new
+	@answer.content = params[:answer]
 	@answer.user = @current_user
-	@answer.question = Question.all.first
+	@answer.question = Question.find_by_id(params[:question_id])
 	if @answer.save
-		redirect to('/index')
-	else
-		puts "ERROR #{@answer.errors.full_messages}"
-		redirect to('/answer/new')
+		{:status => 200, :template => erb(:'answer/answer', :layout => false), :question_id => @answer.question.id}.to_json
+	else	
+		{:status => 404, :message => @answer.errors.full_messages.first}.to_json
 	end
 end
 
