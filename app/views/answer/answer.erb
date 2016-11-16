@@ -1,5 +1,7 @@
-<div class="user-answer flex">
-  <img src="img/default-placeholder.png" alt="..." width="40" height="40" class="img">
-  <h3 class="name"><%= @answer.user.name.capitalize %></h3>
+<div class="answer-box" id="answer-box">
+		<div class="user-answer flex">
+		  <img src="img/default-placeholder.png" alt="..." width="40" height="40" class="img">
+		  <h3 class="name"><%= @answer.user.name.capitalize %></h3>
+		</div>
+		<p class="answer-content"><%= truncate(@answer.content) %></p>
 </div>
-<p class="answer-content"><%= truncate(@answer.content) %></p>

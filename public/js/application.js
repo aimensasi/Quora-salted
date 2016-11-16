@@ -3,10 +3,15 @@ $(document).ready(function(){
 });
 
 $(document).on('click', '.btn-answer', function(){
-		answerField = '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
-		answerField += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
-		$answerForm = $(this).parent().next();
-		$answerForm.append(answerField);
+		var $answerForm = $(this).parent().next();
+
+		if ($answerForm.children().length <= 1) {
+			answerField = '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
+			answerField += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
+
+			$answerForm.append(answerField);	
+		}
+
 		$answerForm.on('submit', function(e){
 			e.preventDefault();
 			sendPostRequest('/answer/create', "html", $answerForm.serialize());
@@ -21,8 +26,8 @@ function displayQuestions(data){
 function displayAnswer(data){
 	console.log(data);
 	var $question = $(`#${data['question_id']}`);
-	$question.find('#answer-form').remove();
-	$question.find('#answer-box').css('background-color', '#f6f7f9').append(data['template']);
+	$question.find('#answer-form').hide();
+	$question.append(data['template']);
 }
 
 function sendGetRequest(url, dataType){
