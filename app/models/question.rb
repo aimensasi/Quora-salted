@@ -4,10 +4,6 @@ class Question < ActiveRecord::Base
 	belongs_to :user
 	has_many :answers
 
-	validates :title, :presence => true, :length => {:maximum => 70}
-	validates :description, :length => {:maximum => 220}
+	validates :title, :presence => true, :length => {:maximum => 200}
 	
-
-
-
 end

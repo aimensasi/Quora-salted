@@ -1,49 +1,61 @@
-$(document).ready(function(){
-	sendGetRequest('/questions', 'html');
+$('#question-form').on('submit', function(e){
+	e.preventDefault();
+	// prevent user from submitting multipe times
+	disableSubmit($(this));
+	// enable submit button on form input
+	enableSubmit($(this));
+	//send post request
+	sendPostRequest('/questions/new', "html", $(this).serialize());
+	//clear form input 
+	$(this).find('input[type="text"]').val('');
 });
 
 $(document).on('click', '.btn-answer', function(){
 		var $answerForm = $(this).parent().next();
 		var $answerBox = $answerForm.next();
-
-		if ($answerForm.children().length <= 1) {
-
-			if ($answerBox.length) {
-				$answerBox.remove();
-			}
-
-			answerField = '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
-			answerField += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
-
-			$answerForm.append(answerField);	
-		}
-
+		displayAnswerForm($answerBox, $answerForm);
+		
 		$answerForm.off('submit').on('submit', function(e){
 			e.preventDefault();
 			// prevent user from submitting multipe times
-			$(this).find('input[type="submit"]').attr('disabled', 'disabled');
+			disableSubmit($(this));
 			// enable submit button on form input
-			$(this).on('input', function(){
-				$(this).find('input[type="submit"]').removeAttr('disabled');
-			});
+			enableSubmit($(this));
 			// post an answer
 			console.log('First');
-			sendPostRequest('/answer/create', "html", $answerForm.serialize());
+			sendPostRequest('/answers/new', "html", $answerForm.serialize());
 		});
 });
 
+function displayAnswerForm($answerBox, $answerForm){
+	if ($answerForm.children().length <= 1) {
+		if ($answerBox.length) {
+			$answerBox.remove();
+		}
+		var answerField = '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
+		answerField += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
+		$answerForm.append(answerField);	
+	}
+}
 
+function disableSubmit($form){
+	$form.find('input[type="submit"]').attr('disabled', 'disabled');
+}
+
+function enableSubmit($form){
+	$form.on('input', function(){
+		$form.find('input[type="submit"]').removeAttr('disabled');
+	});
+}
 
 function displayQuestions(data){
-	$('#questions').append(data);
+	console.log(data['template']);
+	$('#questions').prepend(data['template']);
 }
 
 function displayAnswer(data){
 	var $question = $(`#${data['question_id']}`);
 	$question.find('#answer-form').children().not('input[name="question_id"]').remove();
-	if ($question.has(data['template']).length == 0) {
-				
-	}
 	$question.append(data['template']);
 }
 
@@ -55,8 +67,7 @@ function sendGetRequest(url, dataType){
 		dataType: dataType,
 		cache: false,
 		success: function(data){
-			// console.log(data)
-			displayQuestions(data);
+			console.log('Who?');
 		},
 		error: function(err){
 			console.log("ERROR: ");
@@ -77,8 +88,14 @@ function sendPostRequest(url, dataType, data){
 					success: function(data){
 						switch(data['status']){
 							case 200:
-								displayAnswer(data);
-								console.log('got Answer');
+								switch(data['type']){
+									case 'answers':
+										console.log(data)
+										displayAnswer(data);
+										break;
+									case 'questions':
+										displayQuestions(data);
+								}
 							break;
 							case 404:
 							console.log(data['message']);

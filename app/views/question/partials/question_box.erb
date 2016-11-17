@@ -1,5 +1,5 @@
 <div class="user flex">
-  <img src="img/default-placeholder.png" alt="..." width="60" height="60" class="img-thumbnail rounded-circle">
+  <img src="/img/default-placeholder.png" alt="..." width="60" height="60" class="img-thumbnail rounded-circle">
   <div class="name-wrapper">
     <h3 class="name"><%= question.user.name.capitalize %></h3>
     <h5 class="time">30 seconds ago</h5>
@@ -7,7 +7,6 @@
 </div>
 <div class="question-row">
   <a href="/question/<%= question.id %>" target="_blank" class="title" ><%= question.title.capitalize %></a>
-  <p class="description"><%= question.description.capitalize %></p>
 </div>
 <div class="btns">
 	<button class="btn btn-outline-info btn-answer">Answer</button> 

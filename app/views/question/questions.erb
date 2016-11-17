@@ -1,9 +1,15 @@
-<% @questions.each do |question| %>
-			<div class="question-box flex flex-col" id="<%= question.id %>">
-			  <%= erb :"question/question_box", :layout => false, :locals => {:question => question }%>
-			  <form class="answer-form flex flex-col" id="answer-form">
-			  	<input type="hidden" value="<%= question.id %>" name="question_id">
-			  </form>
-			</div>
-<% end %>
+<form action="/questions/new" method="post" class="form-box flex flex-col" id="question-form">
+  <input type="text" placeholder="Ask a question?" class="title" id="title" name="title" autocomplete="off">
+  <input type="submit" class="btn btn-secondary" value="Ask?" id="submit-q">
+</form>
+<div id="questions">
+	<% @questions.each do |question| %>
+				<div class="question-box flex flex-col" id="<%= question.id %>">
+				  <%= erb :"question/partials/question_box", :layout => false, :locals => {:question => question }%>
+				  <form class="answer-form flex flex-col" id="answer-form">
+				  	<input type="hidden" value="<%= question.id %>" name="question_id">
+				  </form>
+				</div>
+	<% end %>
+</div>
 

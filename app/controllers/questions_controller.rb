@@ -1,59 +1,49 @@
-get '/index' do
+get '/questions' do
 	@questions = Question.all
-	erb :"question/index"
-end
 
-# get '/question/new' do 
-# 	@question = Question.new
-# 	puts "New Question"
-# 	erb :"question/new_question"
-# end
-
-get '/questions' do 
-	@questions = Question.all
-	erb :'question/questions', :layout => false
-end
-
-post '/question/create' do 
-	@question = Question.new(params)
-	@question.user = @current_user
-	if @question.save
-		redirect to('/index')
-	else
-		puts "ERROR #{@question.errors.full_messages}"
-		redirect to('/question/new')
-	end
+	erb :"question/questions"
 end
 
 get '/question/:id' do 
 	@question = Question.find_by_id(params[:id])
+
 	erb :"question/show_question"
 end
 
-get '/question/:id/edit' do
-	@question = Question.find_by_id(params[:id])
-	if @question
-		erb :"question/edit_question"
+post '/questions/new' do 
+	@question = Question.new(params)
+	@question.user = @current_user
+	if @question.save
+		{:status => 200, :type => 'questions',  :template => erb(:'question/partials/question', :layout => false, :locals => {:question => @question})}.to_json
 	else
-		redirect to("/index")
+		{:status => 404, :message => @question.errors.full_messages.first}.to_json
 	end
 end
 
-patch '/question/update', allows: [:id, :title, :description] do 
-	@question = Question.find_by_id(params['id'])
+# get '/question/:id/edit' do
+# 	@question = Question.find_by_id(params[:id])
+# 	if @question
+# 		erb :"question/edit_question"
+# 	else
+# 		redirect to("/questions")
+# 	end
+# end
 
-	if @question.update_attributes(params)
-		redirect to("/index")
-	else
-		puts "ERROR #{@question.errors.full_messages}"
-		redirect to("/question/#{params['id']}/edit")
-	end
-end
+# patch '/question/:id', allows: [:id, :title] do 
+# 	@question = Question.find_by_id(params['id'])
 
-get '/question/:id/delete' do
-	@question = Question.find_by_id(params[:id])
-	if @question.delete
-		puts "User Was Deleted"
-		redirect to('/index')
-	end
-end
+# 	if @question.update_attributes(params)
+# 		redirect to("/questions")
+# 	else
+# 		puts "ERROR #{@question.errors.full_messages}"
+# 		redirect to("/question/#{params['id']}/edit")
+# 	end
+# end
+
+# delete '/question/:id' do
+# 	@question = Question.find_by_id(params[:id])
+# 	if @question.delete
+# 		puts "User Was Deleted"
+# 		redirect to('/questions')
+# 	end
+# end

@@ -15,7 +15,7 @@ end
 get '/' do
 	if logged_in
 		@current_user = current_user
-		redirect to('/index')
+		redirect to('/questions')
 	else
 		erb :"layouts/register", :layout => false
 	end
@@ -26,7 +26,7 @@ post '/log-in' do
 	puts "log-in"
 	if @user
 		session['user_id'] = @user.id	
-		redirect to('/index')
+		redirect to('/questions')
 	else
 		redirect to('/')
 	end
@@ -37,7 +37,7 @@ post '/sign-up' do
 
 	if @user.save
 		session['user_id'] = @user.id
-		redirect to('/index')
+		redirect to('/questions')
 	else
 		redirect to('/')	
 	end
