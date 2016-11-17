@@ -28,21 +28,62 @@ $(document).on('click', '.btn-answer', function(){
 		});
 });
 
-//when user wants to voteup on a question
-$(document).on('click', '.btn-upvote', function(){
-	var $voteUp = $(this);
-	var $question = $voteUp.parent().parent();
-	var $downVote = $question.find('.btn-downvote');
-	var questionId = $question.attr('id');
 
-	if ($voteUp.hasClass('clicked')) {
-		$voteUp.removeClass('clicked');
-		sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
-	}else if ($downVote.hasClass('clicked')){
-		$downVote.removeClass('clicked');
-		$voteUp.addClass('clicked');
-		sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Upvote'});
+$(document).on('click', '.btn-upvote, .btn-downvote', function(){
+	var $upVote = "";
+	var $downVote = "";
+	var $question = $(this).parent().parent();
+	var $upVoteText = $question.find('.upvote-txt span');
+	var $downVoteText = $question.find('.downvote-txt span');
+	var questionId = $question.attr('id');
+	//when user wants to voteup on a question
+	if ($(this).hasClass('btn-upvote')) {
+		$upVote = $(this);
+		$downVote = $question.find('.btn-downvote');
+
+		if ($upVote.hasClass('clicked')) {
+			$upVote.removeClass('clicked');
+			$upVoteText.text(parseInt($upVoteText.text()) - 1);
+			sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
+		}else{
+			if ($downVote.hasClass('clicked')) {
+			 $downVote.removeClass('clicked');
+			 $downVoteText.text(parseInt($downVoteText.text()) - 1);
+			}
+
+			$upVote.addClass('clicked');
+			$upVoteText.text(parseInt($upVoteText.text()) + 1);
+			sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Upvote'});
+		}
+
+	}else if ($(this).hasClass('btn-downvote')){
+		$downVote = $(this);
+		$upVote = $question.find('.btn-upvote');
+
+		if ($downVote.hasClass('clicked')) {
+			$downVote.removeClass('clicked');
+			$downVoteText.text(parseInt($downVoteText.text()) - 1);
+			sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
+		}else{
+			if ($upVote.hasClass('clicked')) { 
+				$upVoteText.text(parseInt($upVoteText.text()) - 1);
+				$upVote.removeClass('clicked');
+			}
+			
+			$downVote.addClass('clicked');
+			$downVoteText.text(parseInt($downVoteText.text()) + 1);
+			sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Downvote'});
+		}
 	}
+
+	// if ($voteUp.hasClass('clicked')) {
+	// 	$voteUp.removeClass('clicked');
+	// 	sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
+	// }else if ($downVote.hasClass('clicked')){
+	// 	$downVote.removeClass('clicked');
+	// 	$voteUp.addClass('clicked');
+	// 	sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Upvote'});
+	// }
 	
 });
 

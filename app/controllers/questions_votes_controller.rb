@@ -34,13 +34,8 @@ end
 
 
 delete '/question-votes/:id' do 
-	@vote = QuestionVote.where('question_id = ? AND user_id = ?', params[:question_id], @current_user.id).first
-
-	if @vote
-		
-	end
-
-
+	@vote = QuestionVote.voted?(params[:question_id], @current_user.id).first
+	@vote.delete
 end
 
 

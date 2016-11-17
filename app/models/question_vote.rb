@@ -9,6 +9,5 @@ class QuestionVote < ActiveRecord::Base
 
 	scope :upvote, -> { where('vote_type = ?', 'Upvote') }
 	scope :downvote, -> { where('vote_type = ?', 'Downvote') }
-	scope :desc, ->{order('id DESC')}
 	scope :voted?, -> (question_id, user_id) { where('question_id = ? AND user_id = ?', question_id, user_id) }
 end
