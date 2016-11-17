@@ -5,6 +5,6 @@ class Answer < ActiveRecord::Base
 
 	belongs_to :user
 	belongs_to :question
-
+	has_many :votes, :foreign_key => "answer_id", :class_name => "AnswerVote"
 
 end

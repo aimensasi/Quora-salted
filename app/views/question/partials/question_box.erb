@@ -8,6 +8,10 @@
 <div class="question-row">
   <a href="/question/<%= question.id %>" target="_blank" class="title" ><%= question.title.capitalize %></a>
 </div>
+<div class="status-bar flex">
+  <p class="upvote-txt"><%= question.votes.upvote.count %> Upvotes</p>
+  <p class="downvote-txt"><%= question.votes.downvote.count %> Downvotes</p>
+</div>
 <div class="btns">
 	<button class="btn btn-outline-info btn-answer">Answer</button> 
   <button class="btn btn-upvote" id="up-vote">Upvote</button>

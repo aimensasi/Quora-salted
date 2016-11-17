@@ -1,3 +1,3 @@
-get '/' do
-	erb :""
-end
+# get '/' do
+# 	erb :""
+# end

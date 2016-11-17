@@ -165,8 +165,21 @@ body{
   text-align: justify;
 }
 
+.status-bar{
+  margin-top: 30px;
+}
+
+.status-bar p{
+  margin-bottom: 0;
+  margin-right: 15px;
+}
+
+.status-bar .upvote-txt{
+  margin-left: auto;
+}
+
 .btns{
-  margin: 20px 0 10px;
+  margin: 0px 0 10px;
 }
 
 .btn-upvote, .btn-downvote, .btn-answer, .btn-answer-submit{

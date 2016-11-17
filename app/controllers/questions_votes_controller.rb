@@ -1,2 +1,3 @@
-get '/questions-votes' do
+post '/question-votes/new' do
+	@vote = QuestionVote.new
 end
