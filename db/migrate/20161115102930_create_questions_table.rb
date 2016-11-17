@@ -8,6 +8,7 @@ class CreateQuestionsTable < ActiveRecord::Migration
 			t.timestamps
 
 			t.references :user, :index => true, :foreign_key => "user_id"
+			
 		end
 	end
 
