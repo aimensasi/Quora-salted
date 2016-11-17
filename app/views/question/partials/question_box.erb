@@ -14,6 +14,17 @@
 </div>
 <div class="btns">
 	<button class="btn btn-outline-info btn-answer">Answer</button> 
-  <button class="btn btn-upvote" id="up-vote">Upvote</button>
-  <button class="btn btn-downvote" id="down-vote">Downvote</button>  
+
+  <% if voted = question.votes.voted?(question.id, @current_user.id).first %>
+      <% if voted.vote_type == 'Upvote' %>
+        <button class="btn btn-upvote clicked">Upvoted</button>  
+        <button class="btn btn-downvote">Downvote</button>
+      <% else %>
+        <button class="btn btn-upvote">Upvote</button>
+        <button class="btn btn-downvote clicked">Downvoted</button>    
+      <% end %>
+  <% else %>
+    <button class="btn btn-upvote">Upvote</button>
+    <button class="btn btn-downvote">Downvote</button>  
+  <% end %>
 </div>

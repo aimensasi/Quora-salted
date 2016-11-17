@@ -5,11 +5,12 @@ $('#question-form').on('submit', function(e){
 	// enable submit button on form input
 	enableSubmit($(this));
 	//send post request
-	sendPostRequest('/questions/new', "html", $(this).serialize());
+	sendPostRequest('/questions/new', $(this).serialize());
 	//clear form input 
 	$(this).find('input[type="text"]').val('');
 });
 
+//when user wants to add answer
 $(document).on('click', '.btn-answer', function(){
 		var $answerForm = $(this).parent().next();
 		var $answerBox = $answerForm.next();
@@ -23,9 +24,30 @@ $(document).on('click', '.btn-answer', function(){
 			enableSubmit($(this));
 			// post an answer
 			console.log('First');
-			sendPostRequest('/answers/new', "html", $answerForm.serialize());
+			sendPostRequest('/answers/new', $answerForm.serialize());
 		});
 });
+
+//when user wants to voteup on a question
+$(document).on('click', '.btn-upvote', function(){
+	var $voteUp = $(this);
+	var $question = $voteUp.parent().parent();
+	var $downVote = $question.find('.btn-downvote');
+	var questionId = $question.attr('id');
+
+	if ($voteUp.hasClass('clicked')) {
+		$voteUp.removeClass('clicked');
+		sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
+	}else if ($downVote.hasClass('clicked')){
+		$downVote.removeClass('clicked');
+		$voteUp.addClass('clicked');
+		sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Upvote'});
+	}
+	
+});
+
+
+
 
 function displayAnswerForm($answerBox, $answerForm){
 	if ($answerForm.children().length <= 1) {
@@ -59,6 +81,22 @@ function displayAnswer(data){
 	$question.append(data['template']);
 }
 
+function sendDeleteRequest(url, data){
+	$.ajax({
+		url: url,
+		type: 'DELETE',
+		cache: false,
+		data: data,
+		success: function(data){
+			console.log(data);
+		},
+		error: function(err){
+			console.log(err);
+		}
+		
+	});
+}
+
 function sendGetRequest(url, dataType){
 	if (url === null || url === "" || dataType === null || dataType === "") { return; }
 	$.ajax({
@@ -77,7 +115,7 @@ function sendGetRequest(url, dataType){
 }
 
 // send A POST Ajax Request
-function sendPostRequest(url, dataType, data){
+function sendPostRequest(url, data){
 	console.log('Sending..');
 	$.ajax({
 					url: url,

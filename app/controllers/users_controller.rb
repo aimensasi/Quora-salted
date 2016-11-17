@@ -5,7 +5,6 @@ before do
 	end
 		puts "In"
 	if logged_in
-
 		@current_user = current_user
 	else
 		redirect to('/')
