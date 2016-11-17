@@ -23,6 +23,9 @@ require "sinatra/json"
 	# embedded ruby
 require 'erb'
 require 'uri'
+
+#csv
+require "csv"
 ######################################################################
 
 
@@ -56,4 +59,4 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 ######################################################################
 
-ActiveRecord::Base.logger = nil
+# ActiveRecord::Base.logger = nil
