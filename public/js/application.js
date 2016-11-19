@@ -54,7 +54,7 @@ $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 				$upVoteText.text(parseInt($upVoteText.text()) + 1);
 			}
 		// debugger;	
-		sendPostRequest(`/questions/${questionId}/vote-up`, {'vote_type' : 'vote-up'});
+		sendPostRequest(`/questions/${questionId}/vote`, {'vote_type' : 'Upvote'});
 	}else if ($(this).hasClass('btn-downvote')){
 		$downVote = $(this);
 		$upVote = $question.find('.btn-upvote');
@@ -72,8 +72,7 @@ $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 				$downVote.addClass('clicked');
 				$downVoteText.text(parseInt($downVoteText.text()) + 1);
 			}
-		var url = `/questions/${questionId}/vote-down`;
-		sendPostRequest(`/questions/${questionId}/vote-down`, {'vote_type' : 'vote-down'});
+		sendPostRequest(`/questions/${questionId}/vote`, {'vote_type' : 'Downvote'});
 	}
 });
 

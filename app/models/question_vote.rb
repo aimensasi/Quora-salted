@@ -12,14 +12,6 @@ class QuestionVote < ActiveRecord::Base
 	scope :downvote, -> { where('vote_type = ?', DOWN_VOTE) }
 	scope :voted?, -> (question_id, user_id) { where('question_id = ? AND user_id = ?', question_id, user_id) }
 	# scope :top, -> { count(:).where('vote_type = ?', UP_VOTE).group(:question_id, :user_id)}
-
-	def upvote?
-		QuestionVote.where('vote_type = ?', UP_VOTE).first
-	end
-
-	def downvote?
-		QuestionVote.where('vote_type = ?', DOWN_VOTE).first
-	end
 end
 
 

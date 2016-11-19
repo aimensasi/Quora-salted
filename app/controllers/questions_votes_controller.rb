@@ -1,46 +1,31 @@
-
 #Make it work 
 #Make it right
 #make it fast, pretty and optimized
 
-# post '/question-votes' do
-
-# 	@vote = QuestionVote.voted?(params[:question_id], @current_user.id).first
-
-# 	if @vote
-# 		puts "Found #{@vote.inspect}"
-# 		if @vote.vote_type == 'Upvote'
-# 				@vote.vote_type = 'Downvote'
-# 		elsif @vote.vote_type == 'Downvote'
-# 				@vote.vote_type = 'Upvote'
-# 		end
-# 		return if @vote.save
-# 	end
-
-# 	@vote = QuestionVote.new
-# 	puts "New #{@vote.inspect}"
-# 	@vote.vote_type = params[:type]
-# 	@vote.question = Question.find_by_id(params[:question_id])
-# 	@vote.user = @current_user
-
-# 	if @vote.save
-# 		{:status => 200, :type => 'question_vote', :question_id => params[:question_id]}.to_json
-# 	else
-# 		{:status => 404, :type => 'question_vote', :question_id => params[:question_id]}.to_json
-# 	end
-# end
-
-
-# delete '/question-votes/:id' do 
-# 	@vote = QuestionVote.voted?(params[:question_id], @current_user.id).first
-# 	@vote.delete
-# end
-
-
-
-
-
-
-
-
-
+post '/questions/:id/vote' do
+	message = {}
+	vote_type = params[:vote_type]
+	@question = Question.find_by_id(params[:id])
+	@vote = QuestionVote.voted?(@question.id, @current_user.id).first
+	if @vote
+		if @vote.vote_type.eql?(vote_type)
+			@vote.delete
+			message = {:status => 200, :vote_type => vote.vote_type, :action => "Delete Vote"}
+		else
+			@vote.update(:vote_type => vote_type)
+			message = {:status => 200, :vote_type => vote.vote_type, :action => "Update Vote"}
+		end
+	else
+		vote = QuestionVote.new
+		vote.question = @question
+		vote.user = @current_user
+		vote.vote_type = vote_type
+		if vote.save
+			message = {:status => 200, :vote_type => vote.vote_type}
+		else
+			flash[:notice] = "Something Went Terribly Wrong! #{vote.errors.full_messages}"
+			message = {:status => 400, :message => "Something Went Terribly Wrong! #{vote.errors.full_messages}"}
+		end	
+	end
+	message.to_json
+end
