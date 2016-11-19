@@ -1,8 +1,12 @@
 <div class="user-answer flex">
   <img src="/img/default-placeholder.png" alt="..." width="40" height="40" class="img">
   <a href="/users/<%= answer.user.id %>" class="name"><%= answer.user.name %></a>
+
+  <% if answer.user.eql?(@current_user) %>
+    <%= erb :'answer/edit_answer', :layout => false, :locals => {:answer => answer} %>
+  <% end %>
 </div>
-<p class="answer-content"><%= all ? answer.content : truncate(answer.content) %></p>
+<p class="answer-content content"><%= all ? answer.content : truncate(answer.content) %></p>
 
 <div class="status-bar flex">
   <p class="upvote-txt"><span><%= answer.votes.upvote.count %></span> Upvotes</p>

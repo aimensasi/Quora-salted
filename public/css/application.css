@@ -259,7 +259,26 @@ body{
   background-color: red;
 }
 
+.dropdown{
+  margin-left: auto;
+}
 
+.dropdown .btn{
+  background: transparent;
+}
+
+.fa-2x{
+  color: gray;
+}
+
+.dropdown-menu{
+  margin: -2.5rem -91px 0;
+  min-width: 8rem;
+}
+
+.dropdown-item{
+  cursor: pointer;
+}
 
 
 

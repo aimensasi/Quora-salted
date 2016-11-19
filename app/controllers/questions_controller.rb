@@ -19,32 +19,18 @@ get '/questions/:id' do
 	erb :"question/show_question_answers"
 end
 
+patch '/questions/:id' do 
+	@question = Question.find_by_id(params['id'])
 
-# get '/questions/:id/edit' do
-# 	@question = Question.find_by_id(params[:id])
-# 	if @question
-# 		erb :"question/edit_question"
-# 	else
-# 		redirect to("/questions")
-# 	end
-# end
+	if @question.update_attributes(:title => params[:title])
+		{:status => 200, :type => 'update_questions',  :title => @question.title, :question_id => @question.id}.to_json
+	else
+		{:status => 400, :type => 'update_questions', :message => @question.errors.full_messages.first}.to_json
+	end
+end
 
-# patch '/questions/:id', allows: [:id, :title] do 
-# 	@question = Question.find_by_id(params['id'])
-
-# 	if @question.update_attributes(params)
-# 		redirect to("/questions")
-# 	else
-# 		puts "ERROR #{@question.errors.full_messages}"
-# 		redirect to("/question/#{params['id']}/edit")
-# 	end
-# end
-
-
-# delete '/questions/:id' do
-# 	@question = Question.find_by_id(params[:id])
-# 	if @question.delete
-# 		puts "User Was Deleted"
-# 		redirect to('/questions')
-# 	end
-# end
+delete '/questions/:id' do
+	@question = Question.find_by_id(params[:id])
+	@question.destroy
+	{:status => 200, :type => 'destroy_questions'}.to_json
+end

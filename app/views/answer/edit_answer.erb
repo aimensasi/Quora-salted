@@ -1,0 +1,25 @@
+<!-- Button trigger modal -->
+
+<div class="dropdown">
+  <button class="btn" type="button" id="menu-option" 
+    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-caret-down fa-lg" aria-hidden="true"></i>
+  </button>
+
+  <div class="dropdown-menu" aria-labelledby="menu-option">
+    <button class="dropdown-item " id="edit" 
+    data-target="#edit_question" >Edit</button>
+
+    <button class="dropdown-item" id="delete"
+    data_parent="<%= answer.id %>" data_name="answers">
+    Delete
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="edit_question" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <%= erb :'answer/partials/_form', :layout => false, :locals => {:answer => answer} %>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

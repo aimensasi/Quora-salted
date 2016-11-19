@@ -110,6 +110,10 @@ function displayAnswer(data){
 	var $question = $(`#${data['question_id']}`);
 	var $answerForm = $question.find('#answer-form');
 	var $answerList = $question.next('#answers-list');
+	var $answerCount = $question.find('.answer-txt span');
+	
+	$answerCount.text(parseInt($answerCount.text()) + 1);
+
 	if ($answerForm.length > 0) {
 				$answerForm.remove();
 		}
@@ -126,6 +130,50 @@ function displayQuestion(data){
 	$('#questions').prepend(data.template);
 }
 
+$(document).on('click', '#edit', function(){
+	var $popForm = $($(this).parent().parent().next('#edit_question').get(0));
+	$($popForm).modal('show');
+});
+
+
+$(document).on('submit', '#update-form', function(e){
+		e.preventDefault();
+		var $popForm = $($(this).parent().parent().get(0));
+		var $updateForm = $(this);
+		var parent = $updateForm.attr('data_name');
+		var parentId = $updateForm.attr('data_parent');
+		
+		$popForm.modal('hide');
+
+		sendPatchRequest(`/${parent}/${parentId}`, $updateForm.serialize());
+});
+
+function updateQuestion(data){
+	console.log(data);
+	var $question = $(`#${data.question_id}`);
+	$question.find('.title').text(data.title);
+}
+
+function updateAnswer(data){
+	console.log(data);
+	var $answer = $('#' + data.answer_id);
+	$answer.find('.content').text(data.content);
+}
+
+
+$(document).on('click', '#delete', function(){
+	var $deleteBtn = $(this);
+	var $parent = $('#' + $deleteBtn.attr('data_parent'));
+	var parentId = $deleteBtn.attr('data_parent');
+	var parentName = $deleteBtn.attr('data_name');
+
+	$parent.remove();
+	sendDeleteRequest(`/${parentName}/${parentId}` , {'type' : parentName});
+});
+
+
+
+
 // handle ajax respnse of ok status
 function onOkResponse(data){
 	switch(data.type){
@@ -136,6 +184,18 @@ function onOkResponse(data){
 			displayQuestion(data);
 			break;
 		case 'votes':
+			console.log(data.type);
+			break;
+		case 'update_questions':
+			updateQuestion(data);
+			break;
+		case 'update_answers':
+			updateAnswer(data);
+			break;
+		case 'delete_questions':
+			console.log(data.type);
+			break;
+		case 'delete_answers':
 			console.log(data.type);
 	}
 }
@@ -151,7 +211,7 @@ function onError(data){
 
 // send A POST Ajax Request
 function sendPostRequest(url, data){
-	
+	console.log(data);
 	$.ajax({
 					url: url,
 					type: 'POST',
@@ -171,5 +231,64 @@ function sendPostRequest(url, data){
 					}
 				});
 }
+
+function sendPatchRequest(url, data){
+
+	$.ajax({
+		url: url,
+		type: 'PATCH',
+		dataType: 'json',
+		cache: false,
+		data: data,
+		success: function(data){
+			if (data.status == 200) {
+				onOkResponse(data);
+			}else{
+				onError(data);
+			}
+		},
+		error: function(err){
+			console.log("ERROR");
+			console.log(err);
+		}
+	});
+
+}
+
+function sendDeleteRequest(url, data){
+
+	$.ajax({
+		url: url,
+		type: 'DELETE',
+		dataType: 'json',
+		cache: false,
+		data: data,
+		success: function(data){
+			if (data.status == 200) {
+				onOkResponse(data);
+			}else{
+				onError(data);
+			}
+		},
+		error: function(err){
+			console.log("ERROR");
+			console.log(err);
+		}
+	});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

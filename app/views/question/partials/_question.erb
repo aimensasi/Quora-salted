@@ -4,11 +4,17 @@
     <a class="name" href="/users/<%= question.user.id %>"><%= question.user.name %></a>
     <h5 class="time">30 seconds ago</h5>
   </div>
+  <% if question.user.eql?(@current_user) %>
+    <%= erb :'question/edit_question', :layout => false, :locals => {:question => question} %>
+  <% end %>
 </div>
 <div class="question-row">
-  <a href="/questions/<%= question.id %>" target="_blank" class="title" ><%= question.title.capitalize %></a>
+  <a href="/questions/<%= question.id %>" name="title" class="title" >
+  <%= question.title.capitalize %>
+  </a>
 </div>
 <div class="status-bar flex">
+  <p class="answer-txt"><span><%= question.answers.count %></span> Answers</p>
   <p class="upvote-txt"><span><%= question.votes.upvote.count %></span> Upvotes</p>
   <p class="downvote-txt"><span><%= question.votes.downvote.count %></span> Downvotes</p>
 </div>
@@ -27,3 +33,9 @@
     <button class="btn btn-downvote">Downvote</button>  
   <% end %>
 </div>
+
+
+
+
+
+

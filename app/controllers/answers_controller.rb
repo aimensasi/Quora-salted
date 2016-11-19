@@ -1,8 +1,8 @@
 
 
-get '/answers/new' do 
-	{:status => 200, :type => 'answers', :template => (erb :'answer/new_answer', :layout => false, :locals => {:question_id => params[:question_id]})}.to_json
-end
+# get '/answers/new' do 
+# 	{:status => 200, :type => 'answers', :template => (erb :'answer/new_answer', :layout => false, :locals => {:question_id => params[:question_id]})}.to_json
+# end
 
 
 post '/answers' do 
@@ -24,28 +24,20 @@ post '/answers' do
 	end
 end
 
-# get '/answers/:id/edit' do
-# 	@answer = Answer.find_by_id(params[:id])
-# 	if @answer
-# 		erb :"answer/edit_answer"
-# 	else
-# 		redirect to("/index")
-# 	end
-# end
+patch '/answers/:id' do 
+	@answer = Answer.find_by_id(params[:id])
 
-# patch '/answers/:id', allows: [:id, :content] do 
-# 	@answer = Answer.find_by_id(params['id'])
+	if @answer.update_attributes(:content => params[:content])
+		{:status => 200, :type => 'update_answers',  :content => @answer.content, :answer_id => @answer.id}.to_json
+	else
+		{:status => 400, :type => 'update_answers', :message => @answer.errors.full_messages.first}.to_json
+	end
+end
 
-# 	if @answer.update_attributes(params)
-# 		redirect to("/index")
-# 	else
-# 		puts "ERROR #{@answer.errors.full_messages}"
-# 		redirect to("/answer/#{params['id']}/edit")
-# 	end
-# end
 
-# get '/answers/:id' do
-# 	@answer = Answer.find_by_id(params[:id])
-# 	@answer.delete
-# 	redirect back
-# end
+delete '/answers/:id' do
+	@answers = Answer.find_by_id(params[:id])
+	@answers.destroy
+	{:status => 200, :type => 'destroy_answers'}.to_json
+end
+
