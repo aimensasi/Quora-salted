@@ -1,7 +1,7 @@
 <div class="user flex">
   <img src="/img/default-placeholder.png" alt="..." width="60" height="60" class="img-thumbnail rounded-circle">
   <div class="name-wrapper">
-    <h3 class="name"><%= question.user.name %></h3>
+    <a class="name" href="/users/<%= question.user.id %>"><%= question.user.name %></a>
     <h5 class="time">30 seconds ago</h5>
   </div>
 </div>

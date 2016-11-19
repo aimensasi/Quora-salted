@@ -1,12 +1,20 @@
+
+
 post '/answers' do 
+	puts params.inspect
 	@answer = Answer.new
 	@answer.content = params[:answer]
 	@answer.user = @current_user
 	@answer.question = Question.find_by_id(params[:question_id])
+	white_list = {
+		:content => params[:answer],
+		:user_id => @current_user.id,
+		:question => params[:question_id]
+	}
 	if @answer.save
 		{:status => 200, :type => 'answers',  :template => erb(:'answer/show_answer', :layout => false, :locals => {:answer => @answer}), :question_id => @answer.question.id}.to_json
 	else	
-		{:status => 404, :message => @answer.errors.full_messages.first}.to_json
+		{:status => 400, :type => 'answers', :message => @answer.errors.full_messages.first}.to_json
 	end
 end
 

@@ -10,10 +10,10 @@ post '/questions/:id/vote' do
 	if @vote
 		if @vote.vote_type.eql?(vote_type)
 			@vote.delete
-			message = {:status => 200, :vote_type => vote.vote_type, :action => "Delete Vote"}
+			message = {:status => 200, :type => 'votes', :vote_type => @vote.vote_type, :action => "Delete Vote"}
 		else
 			@vote.update(:vote_type => vote_type)
-			message = {:status => 200, :vote_type => vote.vote_type, :action => "Update Vote"}
+			message = {:status => 200, :type => 'votes', :vote_type => @vote.vote_type, :action => "Update Vote"}
 		end
 	else
 		vote = QuestionVote.new
@@ -21,10 +21,10 @@ post '/questions/:id/vote' do
 		vote.user = @current_user
 		vote.vote_type = vote_type
 		if vote.save
-			message = {:status => 200, :vote_type => vote.vote_type}
+			message = {:status => 200, :type => 'votes', :vote_type => vote.vote_type}
 		else
 			flash[:notice] = "Something Went Terribly Wrong! #{vote.errors.full_messages}"
-			message = {:status => 400, :message => "Something Went Terribly Wrong! #{vote.errors.full_messages}"}
+			message = {:status => 400, :type => 'votes', :message => "Something Went Terribly Wrong! #{vote.errors.full_messages}"}
 		end	
 	end
 	message.to_json

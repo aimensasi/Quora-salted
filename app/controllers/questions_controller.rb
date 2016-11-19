@@ -9,7 +9,7 @@ post '/questions' do
 	if @question.save
 		{:status => 200, :type => 'questions',  :template => erb(:'question/partials/question', :layout => false, :locals => {:question => @question})}.to_json
 	else
-		{:status => 404, :message => @question.errors.full_messages.first}.to_json
+		{:status => 400, :type => 'questions', :message => @question.errors.full_messages.first}.to_json
 	end
 end
 

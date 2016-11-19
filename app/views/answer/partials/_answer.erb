@@ -1,5 +1,5 @@
 <div class="user-answer flex">
   <img src="/img/default-placeholder.png" alt="..." width="40" height="40" class="img">
-  <h3 class="name"><%= answer.user.name.split.map(&:capitalize).join(' ') %></h3>
+  <a href="/users/<%= answer.user.id %>" class="name"><%= answer.user.name %></a>
 </div>
 <p class="answer-content"><%= all ? answer.content : truncate(answer.content) %></p>
