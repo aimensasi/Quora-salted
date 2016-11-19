@@ -24,14 +24,14 @@ function enableSubmit($form){
 $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 	var $upVote = "";
 	var $downVote = "";
-	var $question = $(this).parent().parent();
-	var $upVoteText = $question.find('.upvote-txt span');
-	var $downVoteText = $question.find('.downvote-txt span');
-	var questionId = $question.attr('id');
-	//when user wants to voteup on a question
+	var $parent = $(this).parent().parent();
+	var $upVoteText = $parent.find('.upvote-txt span');
+	var $downVoteText = $parent.find('.downvote-txt span');
+	var parentId = $parent.attr('id');
+	//when user wants to voteup on a parent
 	if ($(this).hasClass('btn-upvote')) {
 		$upVote = $(this);
-		$downVote = $question.find('.btn-downvote');
+		$downVote = $parent.find('.btn-downvote');
 
 			// Update the view
 			if ($upVote.hasClass('clicked')) {
@@ -49,10 +49,10 @@ $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 				$upVoteText.text(parseInt($upVoteText.text()) + 1);
 			}
 		// debugger;	
-		sendPostRequest(`/questions/${questionId}/vote`, {'vote_type' : 'Upvote'});
+		sendPostRequest(`/${$parent.attr('data_name')}/${parentId}/vote`, {'vote_type' : 'Upvote'});
 	}else if ($(this).hasClass('btn-downvote')){
 		$downVote = $(this);
-		$upVote = $question.find('.btn-upvote');
+		$upVote = $parent.find('.btn-upvote');
 
 			// update votes
 			if ($downVote.hasClass('clicked')) {
@@ -69,7 +69,7 @@ $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 				$downVote.addClass('clicked');
 				$downVoteText.text(parseInt($downVoteText.text()) + 1);
 			}
-		sendPostRequest(`/questions/${questionId}/vote`, {'vote_type' : 'Downvote'});
+		sendPostRequest(`/${$parent.attr('data_name')}/${parentId}/vote`, {'vote_type' : 'Downvote'});
 	}
 });
 

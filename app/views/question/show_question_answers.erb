@@ -1,5 +1,5 @@
 <div id="questions">
-	<div class="question-box flex flex-col extra" id="<%= @question.id %>">
+	<div class="question-box flex flex-col extra" id="<%= @question.id %>" data_name="questions">
 	  <%= erb :"question/partials/_question", :layout => false, :locals => {:question => @question }%>
 	</div>
 	<div class="answer-box extra" id="answers-list">

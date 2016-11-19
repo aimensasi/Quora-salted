@@ -8,7 +8,7 @@
   <p class="upvote-txt"><span><%= answer.votes.upvote.count %></span> Upvotes</p>
   <p class="downvote-txt"><span><%= answer.votes.downvote.count %></span> Downvotes</p>
 </div>
-<div class="btns">
+<div class="btns" data_parent="<%= answer.id %>">
   <% if voted = answer.votes.voted?(answer.id, @current_user.id).first %>
       <% if voted.vote_type == 'Upvote' %>
         <button class="btn btn-upvote clicked">Upvoted</button>  

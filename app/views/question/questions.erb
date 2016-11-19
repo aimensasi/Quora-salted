@@ -4,7 +4,7 @@
 </form>
 <div id="questions">
 	<% @questions.each do |question| %>
-				<div class="question-box flex flex-col" id="<%= question.id %>">
+				<div class="question-box flex flex-col" id="<%= question.id %>" data_name="questions">
 				  <%= erb :"question/partials/_question", :layout => false, :locals => {:question => question }%>
 				</div>
 	<% end %>

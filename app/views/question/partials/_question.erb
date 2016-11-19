@@ -14,7 +14,6 @@
 </div>
 <div class="btns" data_parent="<%= question.id %>">
 	<button class="btn btn-outline-info btn-answer">Answer</button> 
-  
   <% if voted = question.votes.voted?(question.id, @current_user.id).first %>
       <% if voted.vote_type == 'Upvote' %>
         <button class="btn btn-upvote clicked">Upvoted</button>  
