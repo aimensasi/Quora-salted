@@ -44,3 +44,6 @@ gem 'byebug'
 
 #putting constraint on which parameter are allowed for each rout
 gem 'sinatra-strong-params'
+
+#flash notice
+gem 'rack-flash3'

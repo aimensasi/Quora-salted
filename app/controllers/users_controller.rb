@@ -1,16 +1,3 @@
-before do
-	#if path request matches any of the given return 
-	if ['/', '/log-in', '/sign-up'].include?(request.path_info)
-		return
-	end
-		puts "In"
-	if logged_in
-		@current_user = current_user
-	else
-		redirect to('/')
-	end
-end
-
 get '/' do
 	if logged_in
 		@current_user = current_user
@@ -20,38 +7,35 @@ get '/' do
 	end
 end
 
-post '/log-in' do 
-	@user = User.is_valid?(params)
-	puts "log-in"
-	if @user
-		session['user_id'] = @user.id	
+post '/users' do
+	white_list = {
+		:first_name => params[:first_name],
+		:last_name => params[:last_name],
+		:password => params[:password],
+		:email => params[:email]
+	}
+	@user = User.new(params)
+
+	if @user.save
+		session['user_id'] = @user.id
+		flash['notice'] = "Welcome To Quora Salted"
 		redirect to('/questions')
 	else
+		flash['notice'] = "Somethig went wrong : #{@user.errors.full_messages.first}"
 		redirect to('/')
 	end
 end
 
-post '/sign-up' do
-	@user = User.new(params) 
 
-	if @user.save
-		session['user_id'] = @user.id
-		redirect to('/questions')
-	else
-		redirect to('/')	
-	end
-end
-
-get '/log-out' do
-	session['user_id'] = nil
-	redirect to('/')
-end
-
-get '/user/:id' do 
+get '/users/:id' do 
 	@user = User.find_by_id(params[:id])
-	#check if there is a user signed in 
-	@current_user = current_user
+	(@current_user ? (@is_current = true) : (@is_current = false))
 	erb :"user/profile"	
+end
+
+get '/users/:id/edit' do 
+	@user = User.find_by_id(params[:id])
+	puts "Edit User"
 end
 
 
