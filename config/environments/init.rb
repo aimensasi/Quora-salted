@@ -19,7 +19,6 @@ require "sinatra/reloader" if development?
 require "sinatra/content_for"
 require 'sinatra/strong-params'
 require "sinatra/json"
-require 'rack-flash'
 
 	# embedded ruby
 require 'erb'
@@ -27,6 +26,11 @@ require 'uri'
 
 #csv
 require "csv"
+
+#rake sessions
+require 'rack-flash'
+enable :sessions
+use Rack::Flash
 ######################################################################
 
 

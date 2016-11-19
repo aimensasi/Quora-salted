@@ -20,11 +20,12 @@ post '/log-in' do
 	@user = User.is_valid?(white_list)
 
 	if @user
-		session['user_id'] = @user.id	
+		session['user_id'] = @user.id
+		flash['notice'] = "Weclome back to Quora"
 		redirect to('/questions')
 	else
-		puts "Error #{@user.errors.full_messages}"
-		redirect to('/')
+		flash['notice'] = "Wrong email or password"
+		redirect back
 	end
 end
 

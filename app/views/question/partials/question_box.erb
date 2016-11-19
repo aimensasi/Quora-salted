@@ -1,12 +1,12 @@
 <div class="user flex">
   <img src="/img/default-placeholder.png" alt="..." width="60" height="60" class="img-thumbnail rounded-circle">
   <div class="name-wrapper">
-    <h3 class="name"><%= question.user.name.capitalize %></h3>
+    <h3 class="name"><%= question.user.name %></h3>
     <h5 class="time">30 seconds ago</h5>
   </div>
 </div>
 <div class="question-row">
-  <a href="/question/<%= question.id %>" target="_blank" class="title" ><%= question.title.capitalize %></a>
+  <a href="/questions/<%= question.id %>" target="_blank" class="title" ><%= question.title.capitalize %></a>
 </div>
 <div class="status-bar flex">
   <p class="upvote-txt"><span><%= question.votes.upvote.count %></span> Upvotes</p>

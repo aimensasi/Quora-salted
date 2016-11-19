@@ -1,4 +1,4 @@
-post '/answers/new' do 
+post '/answers' do 
 	@answer = Answer.new
 	@answer.content = params[:answer]
 	@answer.user = @current_user
@@ -10,7 +10,7 @@ post '/answers/new' do
 	end
 end
 
-get '/answer/:id/edit' do
+get '/answers/:id/edit' do
 	@answer = Answer.find_by_id(params[:id])
 	if @answer
 		erb :"answer/edit_answer"
@@ -19,7 +19,7 @@ get '/answer/:id/edit' do
 	end
 end
 
-patch '/answer/update', allows: [:id, :content] do 
+patch '/answers/:id', allows: [:id, :content] do 
 	@answer = Answer.find_by_id(params['id'])
 
 	if @answer.update_attributes(params)
@@ -30,10 +30,8 @@ patch '/answer/update', allows: [:id, :content] do
 	end
 end
 
-get '/answer/:id/delete' do
+get '/answers/:id' do
 	@answer = Answer.find_by_id(params[:id])
-	if @answer.delete
-		puts "User Was Deleted"
-		redirect to('/index')
-	end
+	@answer.delete
+	redirect back
 end

@@ -1,31 +1,76 @@
-
+<% content_for :profile do %>
     <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <img src="http://placehold.it/110x110" alt="..." class="img-thumbnail rounded-circle">
         <h3 class="name"><%= @user.name %></h3>
       </div>
     </div>
-    <div class="tabs">
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#questions" role="tab">Questions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#answers" role="tab">Answers</a>
-      </ul>
+    <div class="container">
+      <div class="tabs">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#questions" role="tab">Questions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#answers" role="tab">Answers</a>
+          </li>
+          <% if @is_current %>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a>
+            </li>  
+          <% end %>
+        </ul>
 
-      <!-- Tab panes -->
-      <div class="tab-content">
-        <div class="tab-pane active" id="questions" role="tabpanel">
-          <% @user.questions.each do |question| %>
-              <h3 class="title"><%= question.title %></h3>
-              <p class="leads"><%= question.description %></p>
-          <% end %>
-        </div>
-        <div class="tab-pane" id="answers" role="tabpanel">
-          <% @user.answers.each do |answer| %>
-              <p class="leads"><%= answer.content %></p>
-          <% end %>
-        </div>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="questions" role="tabpanel">
+            <div class="list-group">
+              <% @user.questions.each do |question| %>
+                <a href="/questions/<%= question.id %>" 
+                  class="list-group-item list-group-item-action title">
+                  <%= question.title %>
+                </a>    
+              <% end %>  
+            </div>
+          </div>
+          <div class="tab-pane" id="answers" role="tabpanel">
+            <div class="list-group">
+              <% @user.answers.each do |answer| %>
+                  <a href="/questions/<%= answer.question.id %>" 
+                  class="list-group-item list-group-item-action">
+                    <h5 class="list-group-item-heading"><%= answer.question.title %></h5>
+                    <p class="list-group-item-text"><%= answer.content %></p>
+                  </a>
+              <% end %>
+            </div>
+            
+          </div>
+          <div class="tab-pane" id="settings" role="tabpanel">
+            <% if @is_current %>
+              <%= erb :'user/partials/edit_form', :layout => false, :locals => {:user => @current_user} %>
+            <% end %>
+          </div>
+      </div>
     </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

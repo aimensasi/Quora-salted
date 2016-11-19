@@ -5,7 +5,7 @@ $('#question-form').on('submit', function(e){
 	// enable submit button on form input
 	enableSubmit($(this));
 	//send post request
-	sendPostRequest('/questions/new', $(this).serialize());
+	sendPostRequest('/questions', $(this).serialize());
 	//clear form input 
 	$(this).find('input[type="text"]').val('');
 });
@@ -24,7 +24,7 @@ $(document).on('click', '.btn-answer', function(){
 			enableSubmit($(this));
 			// post an answer
 			console.log('First');
-			sendPostRequest('/answers/new', $answerForm.serialize());
+			sendPostRequest('/answers', $answerForm.serialize());
 		});
 });
 
@@ -41,50 +41,40 @@ $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 		$upVote = $(this);
 		$downVote = $question.find('.btn-downvote');
 
-		if ($upVote.hasClass('clicked')) {
-			$upVote.removeClass('clicked');
-			$upVoteText.text(parseInt($upVoteText.text()) - 1);
-			sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
-		}else{
-			if ($downVote.hasClass('clicked')) {
-			 $downVote.removeClass('clicked');
-			 $downVoteText.text(parseInt($downVoteText.text()) - 1);
+			// Update the view
+			if ($upVote.hasClass('clicked')) {
+				$upVote.removeClass('clicked');
+				$upVoteText.text(parseInt($upVoteText.text()) - 1);
+			}else{
+					if ($downVote.hasClass('clicked')) {
+					 $downVote.removeClass('clicked');
+					 $downVoteText.text(parseInt($downVoteText.text()) - 1);
+					}
+				$upVote.addClass('clicked');
+				$upVoteText.text(parseInt($upVoteText.text()) + 1);
 			}
-
-			$upVote.addClass('clicked');
-			$upVoteText.text(parseInt($upVoteText.text()) + 1);
-			sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Upvote'});
-		}
-
+		// debugger;	
+		sendPostRequest(`/questions/${questionId}/vote-up`, {'vote_type' : 'vote-up'});
 	}else if ($(this).hasClass('btn-downvote')){
 		$downVote = $(this);
 		$upVote = $question.find('.btn-upvote');
 
-		if ($downVote.hasClass('clicked')) {
-			$downVote.removeClass('clicked');
-			$downVoteText.text(parseInt($downVoteText.text()) - 1);
-			sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
-		}else{
-			if ($upVote.hasClass('clicked')) { 
-				$upVoteText.text(parseInt($upVoteText.text()) - 1);
-				$upVote.removeClass('clicked');
+			// update votes
+			if ($downVote.hasClass('clicked')) {
+				$downVote.removeClass('clicked');
+				$downVoteText.text(parseInt($downVoteText.text()) - 1);
+			}else{
+				if ($upVote.hasClass('clicked')) { 
+					$upVoteText.text(parseInt($upVoteText.text()) - 1);
+					$upVote.removeClass('clicked');
+				}
+				
+				$downVote.addClass('clicked');
+				$downVoteText.text(parseInt($downVoteText.text()) + 1);
 			}
-			
-			$downVote.addClass('clicked');
-			$downVoteText.text(parseInt($downVoteText.text()) + 1);
-			sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Downvote'});
-		}
+		var url = `/questions/${questionId}/vote-down`;
+		sendPostRequest(`/questions/${questionId}/vote-down`, {'vote_type' : 'vote-down'});
 	}
-
-	// if ($voteUp.hasClass('clicked')) {
-	// 	$voteUp.removeClass('clicked');
-	// 	sendDeleteRequest('/question-votes/:id', {'question_id': questionId});
-	// }else if ($downVote.hasClass('clicked')){
-	// 	$downVote.removeClass('clicked');
-	// 	$voteUp.addClass('clicked');
-	// 	sendPostRequest('/question-votes/new', {'question_id': questionId, 'type': 'Upvote'});
-	// }
-	
 });
 
 
@@ -138,26 +128,9 @@ function sendDeleteRequest(url, data){
 	});
 }
 
-function sendGetRequest(url, dataType){
-	if (url === null || url === "" || dataType === null || dataType === "") { return; }
-	$.ajax({
-		url: url,
-		type: 'GET',
-		dataType: dataType,
-		cache: false,
-		success: function(data){
-			console.log('Who?');
-		},
-		error: function(err){
-			console.log("ERROR: ");
-			console.log(err);
-		}
-	});
-}
-
 // send A POST Ajax Request
 function sendPostRequest(url, data){
-	console.log('Sending..');
+	console.log(url);
 	$.ajax({
 					url: url,
 					type: 'POST',
@@ -177,11 +150,14 @@ function sendPostRequest(url, data){
 								}
 							break;
 							case 404:
+							$('body').empty().append(data)
 							console.log(data['message']);
 						}
 					},
 					error: function(jqXHR, textString, err){
-						console.log(jqXHR['responseText']);
+						// $('body').empty().append(jqXHR['responseText'])
+						console.log(textString);
+						console.log(err);
 					}
 				});
 }

@@ -21,23 +21,23 @@
             <div class="nav navbar-nav flex">
               <a class="navbar-brand" href="/"><img src="/img/logo.svg" height="50" width="80" alt="Quora" class="logo"></a>
               <li class="nav-item">
-                    <a class="nav-link" href="/index">Home</a>
-              </li>
-              <li class="nav-item">
-                    <a class="nav-link" href="#">Question</a>
+                    <a class="nav-link" href="/questions">Home</a>
               </li>
               <li class="nav-item dropdown">
                  <a class="nav-link dropdown-toggle" href="" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <%= @current_user ? @current_user.name.capitalize : 'User' %>
+                   <%= @current_user ? @current_user.name : 'User' %>
                  </a>
                  <div class="dropdown-menu" aria-labelledby="profile">
-                   <a class="dropdown-item" href="/user/<%= @current_user.id if @current_user %>">Profile</a>
+                   <a class="dropdown-item" href="/users/<%= @current_user.id %>">Profile</a>
                    <a class="dropdown-item" href="/log-out">Log out</a>
                  </div>
               </li>
             </div>
           </nav>
         </div>
+      </div>
+      <div class="row">
+        <%= yield_content :profile %>
       </div>
       <div class="row">
         <div class="container">
