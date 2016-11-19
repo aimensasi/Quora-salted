@@ -6,6 +6,7 @@ post '/questions/:id/vote' do
 	message = {}
 	vote_type = params[:vote_type]
 	@question = Question.find_by_id(params[:id])
+	return {:status => 400, :type => 'votes', :message => "Question Does Not Exist"}.to_json if @question.nil?
 	@vote = QuestionVote.voted?(@question.id, @current_user.id).first
 	if @vote
 		if @vote.vote_type.eql?(vote_type)

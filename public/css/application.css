@@ -108,7 +108,7 @@ body{
   box-shadow: 1px 3px 6px 0 rgba(200,200,200,0.2);
 }
 
-.question-box.extra{
+.extra{
   width: 750px;
   margin-left: -50px;
 }

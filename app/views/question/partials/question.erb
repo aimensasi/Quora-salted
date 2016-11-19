@@ -1,6 +1,0 @@
-<div class="question-box flex flex-col" id="<%= question.id %>">
-  <%= erb :"question/partials/question_box", :layout => false, :locals => {:question => question }%>
-  <form class="answer-form flex flex-col" id="answer-form">
-  	<input type="hidden" value="<%= question.id %>" name="question_id">
-  </form>
-</div>

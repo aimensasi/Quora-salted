@@ -3,3 +3,22 @@
   <a href="/users/<%= answer.user.id %>" class="name"><%= answer.user.name %></a>
 </div>
 <p class="answer-content"><%= all ? answer.content : truncate(answer.content) %></p>
+
+<div class="status-bar flex">
+  <p class="upvote-txt"><span><%= answer.votes.upvote.count %></span> Upvotes</p>
+  <p class="downvote-txt"><span><%= answer.votes.downvote.count %></span> Downvotes</p>
+</div>
+<div class="btns">
+  <% if voted = answer.votes.voted?(answer.id, @current_user.id).first %>
+      <% if voted.vote_type == 'Upvote' %>
+        <button class="btn btn-upvote clicked">Upvoted</button>  
+        <button class="btn btn-downvote">Downvote</button>
+      <% else %>
+        <button class="btn btn-upvote">Upvote</button>
+        <button class="btn btn-downvote clicked">Downvoted</button>    
+      <% end %>
+  <% else %>
+    <button class="btn btn-upvote">Upvote</button>
+    <button class="btn btn-downvote">Downvote</button>  
+  <% end %>
+</div>

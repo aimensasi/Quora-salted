@@ -73,50 +73,62 @@ $(document).on('click', '.btn-upvote, .btn-downvote', function(){
 	}
 });
 
-// Handle Answer Form Display
-function displayAnswerForm($answerBox, $answerForm){
-	if ($answerForm.children().length <= 1) {
-		if ($answerBox.length) {
-			$answerBox.remove();
-		}
-		var answerField = '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
-		answerField += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
-		$answerForm.append(answerField);	
-	}
-}
-
 //when user wants to add answer
 $(document).on('click', '.btn-answer', function(){
-		var $answerForm = $(this).parent().next();
-		var $answerBox = $answerForm.next();
-		displayAnswerForm($answerBox, $answerForm);
-		
-		$answerForm.off('submit').on('submit', function(e){
+		var question_id = $(this).parent().attr('data_parent');
+		var $questionBox = $('#questions').find('#' + question_id);
+		var $answerBox = $questionBox.find('.answer-box');
+		var answerForm = '<form class="answer-form flex flex-col" id="answer-form" data_parent="'+ question_id +'">';
+		answerForm += '<input type="hidden" name="question_id" value="' + question_id + '">';
+		answerForm += '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
+		answerForm += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
+		answerForm += '</form>'
+		console.log('Clicked');
+		if ($questionBox.find('.answer-form').length == 0) {
+			console.log(')))0');
+			if ($answerBox.length > 0) {
+				console.log(')))1');
+				$answerBox.remove();
+			}
+			$questionBox.append(answerForm);
+			console.log($questionBox);
+		}
+
+		$questionBox.find('.answer-form').off('submit').on('submit', function(e){
 			e.preventDefault();
 			// prevent user from submitting multipe times
 			disableSubmit($(this));
 			// enable submit button on form input
 			enableSubmit($(this));
 			// post an answer
-			sendPostRequest('/answers', $answerForm.serialize());
+			sendPostRequest('/answers', $(this).serialize());
 		});
 });
 
 // display answer after submitting
 function displayAnswer(data){
 	var $question = $(`#${data['question_id']}`);
-	$question.find('#answer-form').children().not('input[name="question_id"]').remove();
-	$question.append(data['template']);
+	var $answerForm = $question.find('#answer-form');
+	var $answerList = $question.next('#answers-list');
+	if ($answerForm.length > 0) {
+				$answerForm.remove();
+		}
+	if ($answerList.length > 0) {
+		$answerList.prepend(data.template);
+	}else{
+		$question.append(data.template);	
+	}	
+	
 }
 
 
 function displayQuestion(data){
-	$('#questions').prepend(data['template']);
+	$('#questions').prepend(data.template);
 }
 
 // handle ajax respnse of ok status
 function onOkResponse(data){
-	switch(data['type']){
+	switch(data.type){
 		case 'answers':
 			displayAnswer(data);
 			break;
@@ -124,14 +136,17 @@ function onOkResponse(data){
 			displayQuestion(data);
 			break;
 		case 'votes':
-			console.log(data['type']);
+			console.log(data.type);
 	}
 }
 
 // handle error messages
 function onError(data){
 	console.log('onError');
+
 	console.log(data.type);
+	console.log(data.message);
+	console.log(data);
 }
 
 // send A POST Ajax Request
@@ -144,7 +159,7 @@ function sendPostRequest(url, data){
 					cache: false,
 					data: data,
 					success: function(data){
-						if (data['status'] == 200) {
+						if (data.status == 200) {
 							onOkResponse(data);
 						}else{
 							onError(data);
@@ -156,19 +171,5 @@ function sendPostRequest(url, data){
 					}
 				});
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
