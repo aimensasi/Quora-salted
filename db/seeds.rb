@@ -4,7 +4,7 @@ class ImportData
 	
 	def self.import_users
 
-		70.times do 
+		100.times do 
 			User.create(
 				:first_name => Faker::Name.first_name,
 				:last_name => Faker::Name.last_name,
@@ -40,7 +40,7 @@ class ImportData
 		user_ids = User.ids
 		question_ids = Question.ids	
 		
-		100.times do 
+		120.times do 
 			vote = QuestionVote.create!(
 					:question_id => question_ids.sample,
 					:user_id => user_ids.sample,

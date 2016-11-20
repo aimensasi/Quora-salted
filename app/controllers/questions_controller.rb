@@ -1,5 +1,5 @@
 get '/questions' do
-	@questions = Question.paginate(:page => params[:page], :per_page => 30)
+	@questions = Question.paginate(:page => params[:page])
 	erb :"question/questions"
 end
 

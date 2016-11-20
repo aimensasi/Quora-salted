@@ -2,6 +2,8 @@ WillPaginate.per_page = 10
 
 class Question < ActiveRecord::Base
 	# This is Sinatra! Remember to create a migration!
+	self.per_page = 10
+
 	UP_VOTE = 'Upvote'
 	belongs_to :user
 	has_many :answers, :dependent => :destroy
@@ -11,6 +13,8 @@ class Question < ActiveRecord::Base
 	
 	scope :top, -> {  joins(:votes).where('vote_type = ?', UP_VOTE).group(:id).order(id: :desc).count }
 
-	self.per_page = 10
+	
+
+	
 end
 
