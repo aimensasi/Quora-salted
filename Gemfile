@@ -34,6 +34,8 @@ group :production do
 	# ==================
 	gem 'rails_12factor' # Heroku Gem Supports
 	gem 'puma' # Using puma for
+	#include faker 
+	gem 'faker', '~> 1.6', '>= 1.6.6'
 end
 
 gem "eventmachine", "1.0.9"
