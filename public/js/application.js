@@ -1,3 +1,18 @@
+$(document).ready(function(){
+	var next = '<i class="fa fa-angle-left fa-5x" aria-hidden="true"></i>';
+	var pre = '<i class="fa fa-angle-right fa-5x" aria-hidden="true"></i>';
+
+	var $next = $('.pagination .previous_page');
+	var $pre = $('.pagination .next_page');
+	$next.text('');
+	$pre.text('');
+
+	$next.append(next);
+	$pre.append(pre);
+
+});
+
+
 $('#question-form').on('submit', function(e){
 	e.preventDefault();
 	// prevent user from submitting multipe times

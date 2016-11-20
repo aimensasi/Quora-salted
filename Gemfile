@@ -47,3 +47,11 @@ gem 'sinatra-strong-params'
 
 #flash notice
 gem 'rack-flash3'
+
+#include faker 
+gem 'faker', '~> 1.6', '>= 1.6.6'
+
+#will-paginate
+gem 'will_paginate', '~> 3.1.1'
+
+

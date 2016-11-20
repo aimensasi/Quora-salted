@@ -1,6 +1,6 @@
 <% content_for :profile do %>
     <div class="jumbotron jumbotron-fluid">
-      <div class="container">
+      <div class="container flex ">
         <img src="http://placehold.it/110x110" alt="..." class="img-thumbnail rounded-circle">
         <h3 class="name"><%= @user.name %></h3>
       </div>
@@ -30,6 +30,11 @@
                 <a href="/questions/<%= question.id %>" 
                   class="list-group-item list-group-item-action title">
                   <%= question.title %>
+                  <div class="status-bar flex">
+                    <p class="answer-txt"><span><%=question.answers.count %></span> Answers</p>
+                    <p class="upvote-txt"><span><%=question.votes.upvote.count%></span> Upvotes</p>
+                    <p class="downvote-txt"><span><%=question.votes.downvote.count%></span> Downvotes</p>
+                  </div>
                 </a>    
               <% end %>  
             </div>
@@ -41,6 +46,10 @@
                   class="list-group-item list-group-item-action">
                     <h5 class="list-group-item-heading"><%= answer.question.title %></h5>
                     <p class="list-group-item-text"><%= answer.content %></p>
+                    <div class="status-bar flex">
+                      <p class="upvote-txt"><span><%= answer.votes.upvote.count%></span> Upvotes</p>
+                      <p class="downvote-txt"><span><%= answer.votes.downvote.count %></span> Downvotes</p>
+                    </div>
                   </a>
               <% end %>
             </div>

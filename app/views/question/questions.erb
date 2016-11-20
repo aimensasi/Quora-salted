@@ -1,12 +1,22 @@
-<form action="/questions" method="post" class="form-box flex flex-col" id="question-form">
-  <input type="text" placeholder="Ask a question?" class="title" id="title" name="title" autocomplete="off">
-  <input type="submit" class="btn btn-secondary" value="Ask?" id="submit-q">
-</form>
-<div id="questions">
-	<% @questions.each do |question| %>
-				<div class="question-box flex flex-col" id="<%= question.id %>" data_name="questions">
-				  <%= erb :"question/partials/_question", :layout => false, :locals => {:question => question }%>
-				</div>
-	<% end %>
-</div>
+<% content_for :questions do %>
+	<div class="container">
+	    <div class="col-md-7 offset-md-2">
 
+				<form action="/questions" method="post" class="form-box flex flex-col" id="question-form">
+				  <input type="text" placeholder="Ask a question?" class="title" id="title" name="title" autocomplete="off">
+				  <input type="submit" class="btn btn-secondary" value="Ask?" id="submit-q">
+				</form>
+				<div id="questions">
+					<% @questions.each do |question| %>
+								<div class="question-box flex flex-col" id="<%= question.id %>" data_name="questions">
+								  <%= erb :"question/partials/_question", :layout => false, :locals => {:question => question }%>
+								</div>
+					<% end %>
+				</div>
+
+		</div>  <!-- end of column -->
+	</div> <!-- end of container -->
+
+	<%= will_paginate @questions %>
+    
+<% end %>

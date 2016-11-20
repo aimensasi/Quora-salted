@@ -20,12 +20,19 @@ require "sinatra/content_for"
 require 'sinatra/strong-params'
 require "sinatra/json"
 
+#will paginate
+require 'will_paginate'
+require 'will_paginate/active_record'
+
 	# embedded ruby
 require 'erb'
 require 'uri'
 
 #csv
 require "csv"
+
+#faker
+require 'faker'
 
 #rake sessions
 require 'rack-flash'

@@ -37,7 +37,7 @@
           </nav>
         </div>
       </div>
-      <div class="row">
+      <div class="row profile">
         <%= yield_content :profile %>
       </div>
       <div class="row">
@@ -46,6 +46,9 @@
             <%= yield %>
           </div>
         </div>
+      </div>
+      <div class="row">
+        <%= yield_content :questions %>
       </div>
     </div>
 

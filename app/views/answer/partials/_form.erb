@@ -10,14 +10,15 @@
 
    <div class="modal-body">
      <div class="form-group">
-       <input type="text" class="form-control" id="Edit Answer" value="<%= answer.content %>" 
-       name="content">
+        <textarea class="form-control" name="content" id="edit-answer" rows="7">
+          <%= answer.content %>
+        </textarea>
      </div>
    </div>
 
    <div class="modal-footer">
-     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-     <input type="submit" class="btn btn-success" value="Save Changes">
+     <button type="button" class="btn btn-secondary btn-cancel" data-dismiss="modal">Cancel</button>
+     <input type="submit" class="btn btn-outline-success btn-update" value="Save Changes">
    </div>
 
 	</div><!-- /.modal-content -->
