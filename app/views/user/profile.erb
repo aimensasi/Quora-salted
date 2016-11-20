@@ -57,7 +57,8 @@
           </div>
           <div class="tab-pane" id="settings" role="tabpanel">
             <% if @is_current %>
-              <%= erb :'user/partials/edit_form', :layout => false, :locals => {:user => @current_user} %>
+              <%= erb :'user/partials/edit_form', :layout => false,
+                      :locals => {:user => @current_user} %>
             <% end %>
           </div>
       </div>

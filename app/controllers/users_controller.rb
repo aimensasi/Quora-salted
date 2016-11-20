@@ -37,15 +37,14 @@ end
 patch '/users/:id' do
 	white_list = {
 		:first_name => params[:first_name],
-		:last_name => params[:last_name],
-		:password => params[:password],
-		:email => params[:email]
+		:last_name => params[:last_name]
 	}
 	@user = User.find_by_id(params[:id])
-	if @user.update_attributes(white_list)
+	if @user.update_columns(white_list)
 		flash['notice'] = "Your Profile Was Updated Successfully"
-		redirect to("/users/#{@user.id}")
+		redirect back
 	else
+		puts "errors #{@user.errors.full_messages}"
 		flash['notice'] = "Somethig went wrong : #{@user.errors.full_messages.first}"
 		redirect back
 	end

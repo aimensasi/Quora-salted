@@ -145,10 +145,12 @@ function displayQuestion(data){
 	$('#questions').prepend(data.template);
 }
 
+// the code below handle the update and delete of questions answers
 $(document).on('click', '#edit', function(){
 	var $popForm = $($(this).parent().parent().next('#edit_question').get(0));
 	$($popForm).modal('show');
 });
+
 
 
 $(document).on('submit', '#update-form', function(e){
@@ -185,9 +187,6 @@ $(document).on('click', '#delete', function(){
 	$parent.remove();
 	sendDeleteRequest(`/${parentName}/${parentId}` , {'type' : parentName});
 });
-
-
-
 
 // handle ajax respnse of ok status
 function onOkResponse(data){

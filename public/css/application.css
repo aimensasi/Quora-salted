@@ -377,6 +377,12 @@ body{
   margin-top: 40px;
 }
 
+.profile .name{
+  margin-top: auto;
+  margin-bottom: 30px;
+  margin-left: 25px;
+}
+
 .profile #answers .list-group-item{
   min-height: 90px;
 }
