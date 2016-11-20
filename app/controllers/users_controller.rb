@@ -1,3 +1,4 @@
+
 get '/' do
 	if logged_in
 		@current_user = current_user
@@ -19,10 +20,9 @@ post '/users' do
 
 	if @user.save
 		session['user_id'] = @user.id
-		flash['notice'] = "Welcome To Quora Salted"
 		redirect to('/questions')
 	else
-		flash['error'] = "Somethig went wrong : #{@user.errors.full_messages.first}"
+		flash[:notice] = "Somethig went wrong :  #{@user.errors.full_messages.first}"
 		puts "Somethig went wrong : #{@user.errors.full_messages.first}"
 		redirect to('/')
 	end

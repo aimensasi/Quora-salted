@@ -36,8 +36,6 @@ require 'faker'
 
 #rake sessions
 require 'rack-flash'
-enable :sessions
-use Rack::Flash
 ######################################################################
 
 

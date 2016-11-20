@@ -98,15 +98,12 @@ $(document).on('click', '.btn-answer', function(){
 		answerForm += '<textarea name="answer" class="answer-field" rows="5" placeholder="Answer..."></textarea>';
 		answerForm += '<input type="submit" class="btn btn-outline-success btn-answer-submit" id="submit-a">';
 		answerForm += '</form>'
-		console.log('Clicked');
+
 		if ($questionBox.find('.answer-form').length == 0) {
-			console.log(')))0');
 			if ($answerBox.length > 0) {
-				console.log(')))1');
 				$answerBox.remove();
 			}
 			$questionBox.append(answerForm);
-			console.log($questionBox);
 		}
 
 		$questionBox.find('.answer-form').off('submit').on('submit', function(e){
@@ -166,13 +163,11 @@ $(document).on('submit', '#update-form', function(e){
 });
 
 function updateQuestion(data){
-	console.log(data);
 	var $question = $(`#${data.question_id}`);
 	$question.find('.title').text(data.title);
 }
 
 function updateAnswer(data){
-	console.log(data);
 	var $answer = $('#' + data.answer_id);
 	$answer.find('.content').text(data.content);
 }
@@ -198,7 +193,6 @@ function onOkResponse(data){
 			displayQuestion(data);
 			break;
 		case 'votes':
-			console.log(data.type);
 			break;
 		case 'update_questions':
 			updateQuestion(data);
@@ -207,10 +201,8 @@ function onOkResponse(data){
 			updateAnswer(data);
 			break;
 		case 'delete_questions':
-			console.log(data.type);
 			break;
 		case 'delete_answers':
-			console.log(data.type);
 	}
 }
 
@@ -220,12 +212,10 @@ function onError(data){
 
 	console.log(data.type);
 	console.log(data.message);
-	console.log(data);
 }
 
 // send A POST Ajax Request
 function sendPostRequest(url, data){
-	console.log(data);
 	$.ajax({
 					url: url,
 					type: 'POST',
@@ -291,18 +281,6 @@ function sendDeleteRequest(url, data){
 	});
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

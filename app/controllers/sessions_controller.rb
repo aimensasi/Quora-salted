@@ -1,3 +1,7 @@
+enable :sessions
+use Rack::Flash
+
+
 before do
 	#if path request matches any of the given return 
 	if ['/', '/log-in', '/users'].include?(request.path_info)
@@ -24,7 +28,7 @@ post '/log-in' do
 		flash['notice'] = "Weclome back to Quora"
 		redirect to('/questions')
 	else
-		flash['notice'] = "Wrong email or password"
+		flash['notice'] = "Somethig went wrong :  Wrong email or password"
 		redirect back
 	end
 end

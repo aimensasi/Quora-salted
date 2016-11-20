@@ -98,7 +98,14 @@ body{
 	height: 35px;
 	font-size: .9rem;
 }
+.alert-danger p{
+	margin-left: auto;
+	margin-right: auto;
+}
 
+.alert-danger{
+	height: 50px;
+}
 
 
 

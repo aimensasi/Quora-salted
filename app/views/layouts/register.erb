@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+    <title>Quora | Sign Up</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/register.css">
@@ -16,14 +17,10 @@
     <div class="container-fluid wrapper">
       <div class="row alert-notice">
           <% if flash[:notice] %>
-              
-          <% elsif flash[:error] %>
-            <div class="alert alert-danger flex" role="alert" id="notice">
-              <div class="wrap flex"><p><%= flash[:error] %></p></div> 
+            <div class="alert alert-danger flex fade in" role="alert" id="notice">
+                <p><%= flash[:notice] %></p>
             </div>  
           <% end %>
-
-          
       </div>
       <div class="row">
           <div class="container">
@@ -44,10 +41,10 @@
                            </div>
                         </div>
                          <div class="form-group">
-                           <input type="email" class="form-control" name="email" placeholder="Email">
+                           <input type="email" class="form-control" name="email" placeholder="Email" autocomplete="nope">
                          </div>
                          <div class="form-group">
-                           <input type="password" class="form-control" name="password" placeholder="Password">
+                           <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="nope">
                          </div>
                          <input type="submit" class="btn btn-primary" value="Sign Up">
                       </form>
@@ -57,7 +54,7 @@
                       <form action="/log-in" class="flex flex-col" method="post" id="log-in">
                         <h4 class="title">Log In</h4>
                         <div class="form-group">
-                           <input type="email" class="form-control" name="email" placeholder="Email">
+                           <input type="email" class="form-control" name="email" placeholder="Email" autofocus="true">
                          </div>
                          <div class="form-group">
                            <input type="password" class="form-control" name="password" placeholder="Password">
