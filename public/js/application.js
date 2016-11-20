@@ -4,11 +4,14 @@ $(document).ready(function(){
 
 	var $next = $('.pagination .previous_page');
 	var $pre = $('.pagination .next_page');
+	var $gap = $('span.gap');
+
 	$next.text('');
 	$pre.text('');
 
 	$next.append(next);
 	$pre.append(pre);
+	$gap.remove();
 
 });
 
