@@ -1,6 +1,6 @@
 before do
 	#if path request matches any of the given return 
-	if ['/', '/log-in', '/sign-up'].include?(request.path_info)
+	if ['/', '/log-in', '/users'].include?(request.path_info)
 		return
 	end
 	#check if user logged in

@@ -8,6 +8,7 @@ get '/' do
 end
 
 post '/users' do
+	puts "Signing-up"
 	white_list = {
 		:first_name => params[:first_name],
 		:last_name => params[:last_name],
@@ -21,7 +22,8 @@ post '/users' do
 		flash['notice'] = "Welcome To Quora Salted"
 		redirect to('/questions')
 	else
-		flash['notice'] = "Somethig went wrong : #{@user.errors.full_messages.first}"
+		flash['error'] = "Somethig went wrong : #{@user.errors.full_messages.first}"
+		puts "Somethig went wrong : #{@user.errors.full_messages.first}"
 		redirect to('/')
 	end
 end
