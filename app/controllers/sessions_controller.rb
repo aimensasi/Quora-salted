@@ -1,5 +1,5 @@
 enable :sessions
-use Rack::Flash
+use Rack::Flash, :sweep => true
 
 
 before do
@@ -25,7 +25,6 @@ post '/log-in' do
 
 	if @user
 		session['user_id'] = @user.id
-		flash['notice'] = "Weclome back to Quora"
 		redirect to('/questions')
 	else
 		flash['notice'] = "Somethig went wrong :  Wrong email or password"
